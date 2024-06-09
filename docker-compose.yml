@@ -1,0 +1,18 @@
+version: '3'
+services:         #defines the containers
+  server:
+    build: ./server   #instructs to build a image from the Dockerfile located in the server directory
+    ports:
+      - "8080:8080"  #maps containers 8080 port to host's 8080 port
+    networks:
+      - my-network    #connects server container to my-netwrok network 
+
+  client:
+    build: ./client
+    depends_on:
+      - server
+    networks:
+      - my-network
+
+networks:
+  my-network:
